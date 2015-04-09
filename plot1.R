@@ -1,10 +1,8 @@
 ## Getting the dataset
-
 hpc_raw <- read.csv("./household_power_consumption.txt", header=T, sep=';', na.strings="?")
 hpc_raw$Date <- as.Date(hpc_raw$Date, format="%d/%m/%Y")
 
 ## Creating subset 01-02-2007 -- 02-02-2007
-
 hpc_subset <- subset(hpc_raw, subset=(Date >= "2007-02-01" & Date <= "2007-02-02"))
 rm(hpc_raw)
 
