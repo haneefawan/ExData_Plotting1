@@ -1,0 +1,22 @@
+## Getting the dataset
+
+hpc_raw <- read.csv("./household_power_consumption.txt", header=T, sep=';', na.strings="?")
+hpc_raw$Date <- as.Date(hpc_raw$Date, format="%d/%m/%Y")
+
+## Creating subset 01-02-2007 -- 02-02-2007
+
+hpc_subset <- subset(hpc_raw, subset=(Date >= "2007-02-01" & Date <= "2007-02-02"))
+rm(hpc_raw)
+
+## Converting date
+datetime <- paste(as.Date(hpc_subset$Date), hpc_subset$Time)
+hpc_subset$Datetime <- as.POSIXct(datetime)
+
+## Creating Plot 2
+plot(hpc_subset$Global_active_power~hpc_subset$Datetime, type="1",
+     ylab="Golabal Active Power (kilowatts)",
+     xlab="")
+
+## Saving to .png file
+dev.copy(png, file="plot2.png", height=480, width=480)
+dev.off()
